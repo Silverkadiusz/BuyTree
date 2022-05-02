@@ -4,7 +4,7 @@ import com.example.buytree.offer.NoCategoryException;
 
 import java.util.Arrays;
 
-public enum Category {
+public class Category {
     ELECTRONICS("Elektronika"),
     AGD("Agd"),
     MOTO("Moto");
