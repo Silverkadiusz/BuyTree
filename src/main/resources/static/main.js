@@ -25,7 +25,7 @@ const CategoryItem = ({ id, name, description, offers }) => `
 
 const Empty = () => `
     <div class="row mt-2">
-        <h2 class="mx-auto">Brak napraw</h2>
+        <h2 class="mx-auto">Brak ofert</h2>
     </div>
 `;
 
@@ -132,7 +132,7 @@ const renderOfferCount = () => {
                 .text(`Liczba ogłoszeń: ${offers}`));
         } else {
             jumboContainer.append($("<p></p>")
-                .text('Brak napraw'));
+                .text('Brak ogłoszeń'));
         }
     });
 };

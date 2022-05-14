@@ -43,6 +43,10 @@ public class OfferRestController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        offerService.deleteOffer(id);
+    }
 
 
 }

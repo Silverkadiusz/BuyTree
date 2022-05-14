@@ -1,20 +1,24 @@
 package com.example.buytree.offer;
 
 import com.example.buytree.category.Category;
-import org.springframework.http.ResponseEntity;
+import com.example.buytree.category.CategoryRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
 public class OfferService {
 
     private final OfferRepository offerRepository;
+    private final CategoryRepository categoryRepository;
 
-    public OfferService(OfferRepository offerRepository) {
+    public OfferService(OfferRepository offerRepository, CategoryRepository categoryRepository) {
         this.offerRepository = offerRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -37,7 +41,7 @@ public class OfferService {
         dto.setDescription(offer.getDescription());
         dto.setPrice(offer.getPrice());
         dto.setImgUrl(offer.getImgUrl());
-        dto.setCategory(offer.getCategory().getDisplayName());
+        dto.setCategory(offer.getCategory().getName());
         return dto;
 
     }
@@ -46,14 +50,20 @@ public class OfferService {
         return offerRepository.count();
     }
 
-    public OfferDto insert(OfferDto offerDto) {
 
+
+
+    public OfferDto insert(OfferDto offerDto) {
         Offer offer = new Offer();
         offer.setTitle(offerDto.getTitle());
         offer.setDescription(offerDto.getDescription());
         offer.setPrice(offerDto.getPrice());
         offer.setImgUrl(offerDto.getImgUrl());
-        offer.setCategory(Category.findByDisplayName(offerDto.getCategory()));
+
+        Category category = categoryRepository
+                .findByName(offerDto.getCategory());
+
+        offer.setCategory(category);
 
         offerRepository.save(offer);
 
@@ -63,5 +73,13 @@ public class OfferService {
     public Optional<OfferDto> findById(Long id) {
         return offerRepository.findById(id)
                 .map(this::toOfferDto);
+    }
+
+    public void deleteOffer(Long id) {
+        try {
+            offerRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            // ignore
+        }
     }
 }
