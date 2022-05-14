@@ -1,25 +1,20 @@
 package com.example.buytree.category;
 
-import com.example.buytree.offer.NoCategoryException;
-import com.example.buytree.offer.Offer;
+public class CategoryDto {
 
-import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Set;
-
-@Entity
-public class Category {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     private String description;
+    private int offers;
 
-    @OneToMany(mappedBy = "category")
-    private Set<Offer> offers;
+    public CategoryDto() {
+    }
+
+    public CategoryDto(String name, String description, int offers) {
+        this.name = name;
+        this.description = description;
+        this.offers = offers;
+    }
 
     public Long getId() {
         return id;
@@ -45,11 +40,11 @@ public class Category {
         this.description = description;
     }
 
-    public Set<Offer> getOffers() {
+    public int getOffers() {
         return offers;
     }
 
-    public void setOffers(Set<Offer> offers) {
+    public void setOffers(int offers) {
         this.offers = offers;
     }
 }

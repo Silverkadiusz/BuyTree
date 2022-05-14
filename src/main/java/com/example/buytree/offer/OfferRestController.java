@@ -21,16 +21,18 @@ public class OfferRestController {
         return offerService.findByTitle(title);
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<OfferDto> getOffersById(@PathVariable Long id) {
         return ResponseEntity.of(offerService.findById(id));
-
     }
+
 
     @GetMapping("/count")
     public long getOffersCount() {
         return offerService.countAll();
     }
+
 
     @PostMapping("")
     public ResponseEntity<?>addOffer(@RequestBody OfferDto offerDto) {
@@ -40,5 +42,11 @@ public class OfferRestController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        offerService.deleteOffer(id);
+    }
+
 
 }
