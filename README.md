@@ -18,3 +18,6 @@ POST: /api/offers - zapisuje przesłaną ofertę
 Strona z listą kategorii/ categories.html
 GET /api/categories - zwraca listę wszystkich kategorii w aplikacji
 ![image](https://user-images.githubusercontent.com/56314198/168429238-e6058107-1eee-46d6-87d3-d3056ed7c622.png)
+
+
+Arkadiusz Skrodzki
